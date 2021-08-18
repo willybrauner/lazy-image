@@ -1,3 +1,3 @@
-export { LazyBackgroundImage } from "./lazyBackgroundImage"
-export { LazyImage } from "./lazyImage"
+export { LazyBackgroundImage } from "./LazyBackgroundImage"
+export { LazyImage } from "./LazyImage"
 export { lazyState } from "./common"
