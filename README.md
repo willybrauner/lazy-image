@@ -13,7 +13,7 @@ A zero dependency lazy and responsive image management for image and background-
 $ npm install -s @wbe/lazy-image
 ```
 
-## lazyImage()
+## LazyImage
 
 ### Lazyload a group of images
 
@@ -27,9 +27,9 @@ HTML template:
 ```
 
 ```js
-import { lazyImage } from "@wbe/lazy-image";
+import { LazyImage } from "@wbe/lazy-image";
 
-const image = lazyImage();
+const image = new LazyImage();
 // start to listen
 image.start();
 // stop to listen
@@ -52,14 +52,14 @@ When image is appear in viewport, data-srcset value is injected in srcset attrib
 
 ### Lazyload a specific image
 
-`lazyImage()` can lazyload specific image only.
+`LazyImage()` can lazyload specific image only.
 
 ```html
 <img alt="image" id="singleImage" srcset="img-360.jpg 360w, img-768.jpg 768w" />
 ```
 
 ```js
-const singleImage = lazyImage({
+const singleImage = new LazyImage({
   $element: document.getElementById("singleImage"),
 });
 ```
@@ -71,9 +71,9 @@ Or don't specify image srcset in DOM but, directly as function param.
 ```
 
 ```js
-import { lazyImage } from "@wbe/lazy-image";
+import { LazyImage } from "@wbe/lazy-image";
 
-const singleImage = lazyImage({
+const singleImage = LazyImage({
   $element: document.getElementById("singleImage"),
   srcset: "img-360.jpg 360w, img-768.jpg 768w",
   // or src: "img-360.jpg",
@@ -93,9 +93,9 @@ All parameters are optional.
 | `lazyCallback`    | `(state)=> void`           | callback executed when lazy state change (`lazyload`, `lazyloading` , `lazyloaded`) | `() => {}`      |
 | `observerOptions` | `IntersectionObserverInit` | mutation observer options                                                           | `{}`            |
 
-## lazyBackgroundImage()
+## LazyBackgroundImage
 
-`lazyBackgroundImage()` set the appropriate image URL from srcset, in CSS background-image url of specific div.
+`LazyBackgroundImage()` set the appropriate image URL from srcset, in CSS background-image url of specific div.
 This appropriate image URL depends of element width.
 
 ### Lazyload a group of background-images
@@ -105,9 +105,9 @@ This appropriate image URL depends of element width.
 ```
 
 ```js
-import { lazyBackgroundImage } from "@wbe/lazy-image";
+import { LazyBackgroundImage } from "@wbe/lazy-image";
 
-const backgroundImage = lazyBackgroundImage();
+const backgroundImage = new LazyBackgroundImage();
 backgroundImage.start();
 ```
 
@@ -123,16 +123,16 @@ When DOM element appear in viewport, and element width is less than 360px:
 
 ### Lazyload a specific background-image
 
-`lazyBackgroundImage()` can lazyload specific css image only.
+`LazyBackgroundImage()` can lazyload specific css image only.
 
 ```html
 <div id="single" data-background-srcset="img-1.jpg 360w, img-2.jpg 768w" />
 ```
 
 ```js
-import { lazyBackgroundImage } from "@wbe/lazy-image";
+import { LazyBackgroundImage } from "@wbe/lazy-image";
 
-const singleBackgroundImage = lazyBackgroundImage({
+const singleBackgroundImage = new LazyBackgroundImage({
   $element: document.getElementById("single"),
 });
 // start to listen
@@ -150,9 +150,9 @@ Or don't specify image srcset in DOM but, directly as function param.
 ```
 
 ```js
-import { lazyBackgroundImage } from "@wbe/lazy-image";
+import { LazyBackgroundImage } from "@wbe/lazy-image";
 
-const singleBackgroundImage = lazyBackgroundImage({
+const singleBackgroundImage = LazyBackgroundImage({
   $element: document.getElementById("single"),
   srcset: "img-1.jpg 360w, img-2.jpg 768w",
 });
