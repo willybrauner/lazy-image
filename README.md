@@ -73,7 +73,7 @@ Or don't specify image srcset in DOM but, directly as function param.
 ```js
 import { LazyImage } from "@wbe/lazy-image";
 
-const singleImage = LazyImage({
+const singleImage = new LazyImage({
   $element: document.getElementById("singleImage"),
   srcset: "img-360.jpg 360w, img-768.jpg 768w",
   // or src: "img-360.jpg",
