@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "composite": false,
+    "module": "commonjs",
+    "target": "es6",
+    "lib": ["dom", "esnext"],
+    "moduleResolution": "node",
+    "types": ["node", "jest"],
+    "jsx": "react",
+    "declaration": true,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "preserveConstEnums": true,
+    "strictNullChecks": false,
+    // allow to not notify conflicts if the same dependency is imported in
+    // two differents packages but not the same version
+    // pass to true for disable this check.
+    "skipLibCheck": false,
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "exclude": ["node_modules", "dist", "test"]
+}
