@@ -10,100 +10,106 @@ type TLazyImageParams = {
   observerOptions?: IntersectionObserverInit
 }
 
-export type TLazyImage = {
-  stop: () => void
-  start: () => void
-  update: () => void
-}
-
 /**
- * @name lazyImage
+ * @name LazyImage
  * @desc Choose the appropriate image URL from srcset attr and
  * preload image before add its url in background-image style attr.
  *
  */
-export function lazyImage({
-  $element,
-  srcset,
-  src,
-  $root = document.body,
-  lazyCallback = () => {},
-  observerOptions = {},
-}: TLazyImageParams = {}): TLazyImage {
-  const dataSrcsetAttr = "data-srcset"
-  const dataSrcAttr = "data-src"
-  let observer: IntersectionObserver
+export class LazyImage {
+  protected dataSrcsetAttr = "data-srcset"
+  protected dataSrcAttr = "data-src"
+  protected observer: IntersectionObserver
+  protected isSpecificElement: boolean
+  protected $element: HTMLElement
+  protected srcset: string
+  protected src: string
+  protected $root: HTMLElement
+  protected lazyCallback: (state) => void
+  protected observerOptions: IntersectionObserverInit
 
-  // check props to know if specific src
-  const isSpecificElement = !!$element || !!src || !!srcset
+  constructor({
+    $element,
+    srcset,
+    src,
+    $root = document.body,
+    lazyCallback = () => {},
+    observerOptions = {},
+  }: TLazyImageParams = {}) {
+    this.$element = $element
+    this.src = src
+    this.$root = $root
+    this.lazyCallback = lazyCallback
+    this.observerOptions = observerOptions
+    this.isSpecificElement = !!$element || !!src || !!srcset
+  }
 
   /**
    * Start
    */
-  const start = (): void => {
-    _observe()
+  public start(): void {
+    this._observe()
   }
 
   /**
    * Update
    */
-  const update = (): void => {
-    stop()
-    start()
+  public update(): void {
+    this.stop()
+    this.start()
   }
 
   /**
    * Stop
    */
-  const stop = (): void => {
-    observer.disconnect()
+  public stop(): void {
+    this.observer.disconnect()
   }
 
   /**
    * Get elements with data-src or data-srcset attr
    */
-  // prettier-ignore
-  const _getElementsWithDataAttr = (): HTMLImageElement[] => {
-     const $els = [
-        // @ts-ignore
-        ...($root.querySelectorAll(`[${dataSrcsetAttr}]`) || []),
-        ...($root.querySelectorAll(`[${dataSrcAttr}]`) || []),
-      ];
-      return $els?.length ? $els : null;
-    };
+  private _getElementsWithDataAttr(): HTMLImageElement[] {
+    const $els = [
+      // @ts-ignore
+      ...(this.$root.querySelectorAll(`[${this.dataSrcsetAttr}]`) || []),
+      ...(this.$root.querySelectorAll(`[${this.dataSrcAttr}]`) || []),
+    ]
+    return $els?.length ? $els : null
+  }
 
   /**
    * Start observer via intersection observer
    */
-  const _observe = (): void => {
+  private _observe(): void {
     if (!("IntersectionObserver" in window)) return
-    observer = new IntersectionObserver(_observeOnChangeCallBack, observerOptions)
+    this.observer = new IntersectionObserver(this._observeOnChangeCallBack, this.observerOptions)
     // get elements to observe
     // prettier-ignore
-    const elsToObserve = isSpecificElement
-      ? $element ? [$element] : null : _getElementsWithDataAttr();
+    const elsToObserve = this.isSpecificElement
+      ? this.$element ? [this.$element] : null : this._getElementsWithDataAttr();
 
-    elsToObserve?.forEach((el) => observer.observe(el))
+    elsToObserve?.forEach((el) => this.observer.observe(el))
   }
 
   /**
-   *
+   * Observer callback
    * @param entries
    */
-  const _observeOnChangeCallBack = (entries: IntersectionObserverEntry[]): void => {
+  private _observeOnChangeCallBack = (entries: IntersectionObserverEntry[]): void => {
     entries.forEach(async (el) => {
       const $current = el.target as HTMLImageElement
       // switch lazyState
-      _switchLazyState($current, "lazyload")
+      this._switchLazyState($current, "lazyload")
       if (el.isIntersecting) {
         // disconnect
-        observer.unobserve($current)
+        this.observer.unobserve($current)
         // switch lazyState
-        _switchLazyState($current, "lazyloading")
+        this._switchLazyState($current, "lazyloading")
         // start preload and replace
-        await _preloadImage($current)
+        await this._preloadImage($current)
         // switch lazyState
-        _switchLazyState($current, "lazyloaded")
+        this._switchLazyState($current, "lazyloaded")
       }
     })
   }
@@ -112,10 +118,10 @@ export function lazyImage({
    * Preload images and set new URL in src or srcset attr
    * @param $el
    */
-  const _preloadImage = ($el: HTMLImageElement): Promise<void> => {
+  private _preloadImage($el: HTMLImageElement): Promise<void> {
     return new Promise((resolve) => {
-      const dataSrcValue = src || $el.getAttribute(dataSrcAttr)
-      const dataSrcSetValue = srcset || $el.getAttribute(dataSrcsetAttr)
+      const dataSrcValue = this.src || $el.getAttribute(this.dataSrcAttr)
+      const dataSrcSetValue = this.srcset || $el.getAttribute(this.dataSrcsetAttr)
 
       // create void image tag for start preload
       const $fakeImg = document.createElement("img")
@@ -135,7 +141,7 @@ export function lazyImage({
    * @param $el
    * @param state
    */
-  const _switchLazyState = ($el, state: TLazy): void => {
+  private _switchLazyState($el, state: TLazy): void {
     // remove all lazy class
     Object.values(lazyState).forEach((el) => {
       $el.classList.remove(el)
@@ -143,12 +149,6 @@ export function lazyImage({
     // add param lazyclass
     $el.classList.add(state)
     // execute callback
-    lazyCallback(state)
-  }
-
-  return {
-    start,
-    update,
-    stop,
+    this.lazyCallback(state)
   }
 }

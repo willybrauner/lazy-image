@@ -1,5 +1,5 @@
 import "./index.css"
-import { lazyBackgroundImage, lazyImage } from "../src"
+import { lazyBackgroundImage, LazyImage } from "../src"
 
 const buildSrcset = (id: number = 1, ratio = 4 / 3) =>
   [
@@ -10,30 +10,30 @@ const buildSrcset = (id: number = 1, ratio = 4 / 3) =>
 
 // -----------------------------------------------------------------------------  IMAGE
 // avec attr
-const image = lazyImage()
-image.start()
+// const image = new LazyImage()
+// image.start()
 
-// // pas d'attr
-// const singleImage = lazyImage({
-//   $element: document.getElementById("singleImage"),
-//   srcset: buildSrcset(),
-//   // src: `https://picsum.photos/id/${1}/360/${Math.round(360 * 4/6)}`,
-// });
-// singleImage.start();
-
-// ----------------------------------------------------------------------------- BACKGROUND IMAGE
-// /**
-//  * All div element with data-background-srcset attr
-//  */
-const backgroundImageWithAttr = lazyBackgroundImage()
-backgroundImageWithAttr.start()
-//
-// /**
-//  *  specific div
-//  */
-const singleBackgroundImage = lazyBackgroundImage({
-  $element: document.getElementById("single"),
-  //srcset: `https://picsum.photos/id/${1}/360/${Math.round((360 * 4) / 6)}`,
-  srcset: buildSrcset(),
+// pas d'attr
+const singleImage = new LazyImage({
+  $element: document.getElementById("singleImage"),
+  //  srcset: buildSrcset(),
+  // src: `https://picsum.photos/id/${1}/360/${Math.round(360 * 4/6)}`,
 })
-singleBackgroundImage.start()
+singleImage.start()
+
+// // ----------------------------------------------------------------------------- BACKGROUND IMAGE
+// // /**
+// //  * All div element with data-background-srcset attr
+// //  */
+// const backgroundImageWithAttr = lazyBackgroundImage()
+// backgroundImageWithAttr.start()
+// //
+// // /**
+// //  *  specific div
+// //  */
+// const singleBackgroundImage = lazyBackgroundImage({
+//   $element: document.getElementById("single"),
+//   //srcset: `https://picsum.photos/id/${1}/360/${Math.round((360 * 4) / 6)}`,
+//   srcset: buildSrcset(),
+// })
+// singleBackgroundImage.start()
