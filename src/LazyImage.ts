@@ -1,5 +1,4 @@
-import { TLazy } from "./types"
-import { lazyState } from "./common"
+import { TLazy, lazyState } from "./common"
 
 type TLazyImageParams = {
   $element?: HTMLElement
@@ -12,9 +11,7 @@ type TLazyImageParams = {
 
 /**
  * @name LazyImage
- * @desc Choose the appropriate image URL from srcset attr and
- * preload image before add its url in background-image style attr.
- *
+ * @desc Choose the appropriate image URL from srcset attr
  */
 export class LazyImage {
   protected dataSrcsetAttr = "data-srcset"

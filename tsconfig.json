@@ -5,7 +5,7 @@
     "target": "es6",
     "lib": ["dom", "esnext"],
     "moduleResolution": "node",
-    "types": ["node", "jest"],
+    "types": ["node"],
     "jsx": "react",
     "declaration": true,
     "noImplicitAny": false,
@@ -19,5 +19,5 @@
     "outDir": "./dist",
     "rootDir": "./src"
   },
-  "exclude": ["node_modules", "dist", "test"]
+  "exclude": ["node_modules", "dist"]
 }

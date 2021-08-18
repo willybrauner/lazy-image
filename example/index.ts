@@ -1,5 +1,5 @@
 import "./index.css"
-import { lazyBackgroundImage, LazyImage } from "../src"
+import { LazyBackgroundImage, LazyImage } from "../src"
 
 const buildSrcset = (id: number = 1, ratio = 4 / 3) =>
   [
@@ -10,30 +10,29 @@ const buildSrcset = (id: number = 1, ratio = 4 / 3) =>
 
 // -----------------------------------------------------------------------------  IMAGE
 // avec attr
-// const image = new LazyImage()
-// image.start()
+const image = new LazyImage()
+image.start()
 
-// pas d'attr
-const singleImage = new LazyImage({
+const singleImage: LazyImage = new LazyImage({
   $element: document.getElementById("singleImage"),
-  //  srcset: buildSrcset(),
+  // srcset: buildSrcset(),
   // src: `https://picsum.photos/id/${1}/360/${Math.round(360 * 4/6)}`,
 })
 singleImage.start()
 
 // // ----------------------------------------------------------------------------- BACKGROUND IMAGE
-// // /**
-// //  * All div element with data-background-srcset attr
-// //  */
-// const backgroundImageWithAttr = lazyBackgroundImage()
-// backgroundImageWithAttr.start()
-// //
-// // /**
-// //  *  specific div
-// //  */
-// const singleBackgroundImage = lazyBackgroundImage({
-//   $element: document.getElementById("single"),
-//   //srcset: `https://picsum.photos/id/${1}/360/${Math.round((360 * 4) / 6)}`,
-//   srcset: buildSrcset(),
-// })
-// singleBackgroundImage.start()
+// /**
+//  * All div element with data-background-srcset attr
+//  */
+const backgroundImageWithAttr = new LazyBackgroundImage()
+backgroundImageWithAttr.start()
+//
+// /**
+//  *  specific div
+//  */
+const singleBackgroundImage = new LazyBackgroundImage({
+  $element: document.getElementById("single"),
+  //srcset: `https://picsum.photos/id/${1}/360/${Math.round((360 * 4) / 6)}`,
+  srcset: buildSrcset(),
+})
+singleBackgroundImage.start()

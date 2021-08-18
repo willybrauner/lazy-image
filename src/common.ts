@@ -1,4 +1,4 @@
-import { TLazy } from "./types"
+export type TLazy = "lazyload" | "lazyloading" | "lazyloaded"
 
 export const lazyState: { [x: string]: TLazy } = {
   LAZY_LOAD: "lazyload",
