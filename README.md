@@ -1,11 +1,17 @@
 # @wbe/lazy-image
 
 A zero dependency lazy and responsive image management for image and background-image.
+React wrapper component using `lazy-image` is available too.
 
 ![](https://img.shields.io/npm/v/@wbe/lazy-image/latest.svg)
 ![](https://img.shields.io/bundlephobia/minzip/@wbe/lazy-image.svg)
 ![](https://img.shields.io/npm/dt/@wbe/lazy-image.svg)
 ![](https://img.shields.io/npm/l/@wbe/lazy-image.svg)
+
+## Summary
+
+- [Vanilla LazyImage](#LazyImage)
+- [React LazyImage](#ReactLazyImage)
 
 ## Installation
 
@@ -13,7 +19,7 @@ A zero dependency lazy and responsive image management for image and background-
 $ npm install -s @wbe/lazy-image
 ```
 
-## LazyImage
+## <a name="LazyImage"></a>LazyImage
 
 ### Lazyload a group of images
 
@@ -27,15 +33,15 @@ HTML template:
 ```
 
 ```js
-import { LazyImage } from "@wbe/lazy-image";
+import { LazyImage } from "@wbe/lazy-image"
 
-const image = new LazyImage();
+const image = new LazyImage()
 // start to listen
-image.start();
+image.start()
 // stop to listen
-image.stop();
+image.stop()
 // update listeners
-image.update();
+image.update()
 ```
 
 When image is appear in viewport, data-srcset value is injected in srcset attribute.
@@ -61,7 +67,7 @@ When image is appear in viewport, data-srcset value is injected in srcset attrib
 ```js
 const singleImage = new LazyImage({
   $element: document.getElementById("singleImage"),
-});
+})
 ```
 
 Or don't specify image srcset in DOM but, directly as function param.
@@ -71,13 +77,13 @@ Or don't specify image srcset in DOM but, directly as function param.
 ```
 
 ```js
-import { LazyImage } from "@wbe/lazy-image";
+import { LazyImage } from "@wbe/lazy-image"
 
 const singleImage = new LazyImage({
   $element: document.getElementById("singleImage"),
   srcset: "img-360.jpg 360w, img-768.jpg 768w",
   // or src: "img-360.jpg",
-});
+})
 ```
 
 ### Parameters
@@ -105,10 +111,10 @@ This appropriate image URL depends of element width.
 ```
 
 ```js
-import { LazyBackgroundImage } from "@wbe/lazy-image";
+import { LazyBackgroundImage } from "@wbe/lazy-image"
 
-const backgroundImage = new LazyBackgroundImage();
-backgroundImage.start();
+const backgroundImage = new LazyBackgroundImage()
+backgroundImage.start()
 ```
 
 When DOM element appear in viewport, and element width is less than 360px:
@@ -130,17 +136,17 @@ When DOM element appear in viewport, and element width is less than 360px:
 ```
 
 ```js
-import { LazyBackgroundImage } from "@wbe/lazy-image";
+import { LazyBackgroundImage } from "@wbe/lazy-image"
 
 const singleBackgroundImage = new LazyBackgroundImage({
   $element: document.getElementById("single"),
-});
+})
 // start to listen
-singleBackgroundImage.start();
+singleBackgroundImage.start()
 // stop to listen
-singleBackgroundImage.stop();
+singleBackgroundImage.stop()
 // update listeners
-singleBackgroundImage.update();
+singleBackgroundImage.update()
 ```
 
 Or don't specify image srcset in DOM but, directly as function param.
@@ -150,13 +156,13 @@ Or don't specify image srcset in DOM but, directly as function param.
 ```
 
 ```js
-import { LazyBackgroundImage } from "@wbe/lazy-image";
+import { LazyBackgroundImage } from "@wbe/lazy-image"
 
 const singleBackgroundImage = LazyBackgroundImage({
   $element: document.getElementById("single"),
   srcset: "img-1.jpg 360w, img-2.jpg 768w",
-});
-singleBackgroundImage.start();
+})
+singleBackgroundImage.start()
 ```
 
 ## Parameters
@@ -173,15 +179,14 @@ All parameters are optional.
 | `observerOptions` | `IntersectionObserverInit` | mutation observer options                                                                                                                                              | /               |
 | `bigQuality`      | `boolean`                  | will returns 2 steps bigger image (ex: if 360, 768, 1024 img are available, and DOM element width is less than 360, the function will return 768 img instead the 360 ) | `false`         |
 
-
-## React components
+## <a name="ReactLazyImage"></a>React LazyImage
 
 React image component with lazyloading management.
 
 ## `<Image />` component
 
 ```js
-import { Image } from "@wbe/lazy-image";
+import { Image } from "@wbe/lazy-image"
 ```
 
 ### `src` props
@@ -217,10 +222,7 @@ and after lazyload:
 ### `srcset` props
 
 ```js
-<Image
-  srcset={`https://image-url 360w, https://image-url-2 768w`}
-  alt={"srcset image"}
-/>
+<Image srcset={`https://image-url 360w, https://image-url-2 768w`} alt={"srcset image"} />
 ```
 
 ### `data` props
@@ -239,9 +241,9 @@ const data = [
     width: 1000,
     height: 800,
   },
-];
+]
 
-<Image data={data} alt={"srcset image"} />;
+;<Image data={data} alt={"srcset image"} />
 ```
 
 ### `srcPlaceholder` props
@@ -249,11 +251,7 @@ const data = [
 Allow to display specific low quality image before lazyloading src image.
 
 ```js
-<Image
-  srcPlaceholder={`https://low-quality-image-url`}
-  src={`https://image-url`}
-  alt={""}
-/>
+<Image srcPlaceholder={`https://low-quality-image-url`} src={`https://image-url`} alt={""} />
 ```
 
 ### Props list
@@ -262,34 +260,34 @@ Allow to display specific low quality image before lazyloading src image.
 interface IProps {
   // image to display before lazyload
   // default is lightest base64 transparent image
-  srcPlaceholder?: string;
+  srcPlaceholder?: string
 
   // src URL to lazyload
-  src?: string;
+  src?: string
 
   // srcset URL to lazyload
-  srcset?: string;
+  srcset?: string
 
   // list of images with dimension used to build srcset attr
-  data?: TImageData[];
+  data?: TImageData[]
 
   // callback when lazyload state change (lazyload | lazyloading | lazyloaded)
-  lazyCallback?: (lazyState: TLazy) => void;
+  lazyCallback?: (lazyState: TLazy) => void
 
   // intersection observer options
-  observerOptions?: IntersectionObserverInit;
+  observerOptions?: IntersectionObserverInit
 
   // alt attr and aria html
-  alt: string;
-  ariaLabel?: string;
+  alt: string
+  ariaLabel?: string
 
   // class name added on root element
-  className?: string;
+  className?: string
 
   // style attrs
-  style?: CSSProperties;
-  width?: number | string;
-  height?: number | string;
+  style?: CSSProperties
+  width?: number | string
+  height?: number | string
 }
 ```
 
@@ -368,23 +366,23 @@ It's possible to specify an arbitrary ratio who will override image dimension
 ```ts
 interface IProps {
   // Image component
-  children: ReactNode;
+  children: ReactNode
 
   // by default, ratio is calc from children image data dimension.
   // set ratio override native image ratio
-  ratio?: number;
+  ratio?: number
 
   // shortcut to style wrapper background color
-  backgroundColor?: string;
+  backgroundColor?: string
 
   // add style to each dom element
   style?: {
-    root?: CSSProperties;
-    wrapper?: CSSProperties;
-    img?: CSSProperties;
-  };
+    root?: CSSProperties
+    wrapper?: CSSProperties
+    img?: CSSProperties
+  }
 
   // class name added on root element
-  className?: string;
+  className?: string
 }
 ```
