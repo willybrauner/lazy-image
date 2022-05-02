@@ -3,6 +3,8 @@
 A zero dependency lazy and responsive image management for image and background-image.
 React wrapper component using `lazy-image` is available too.
 
+Because the native `loading="lazy"` is not supported on all browsers for now, this library used intersection-observer to detect when the image is visible in the viewport.
+
 ![](https://img.shields.io/npm/v/@wbe/lazy-image/latest.svg)
 ![](https://img.shields.io/bundlephobia/minzip/@wbe/lazy-image.svg)
 ![](https://img.shields.io/npm/dt/@wbe/lazy-image.svg)
