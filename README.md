@@ -70,22 +70,6 @@ const singleImage = new LazyImage({
 })
 ```
 
-Or don't specify image srcset in DOM but, directly as function param.
-
-```html
-<img alt="image" id="singleImage" />
-```
-
-```js
-import { LazyImage } from "@wbe/lazy-image"
-
-const singleImage = new LazyImage({
-  $element: document.getElementById("singleImage"),
-  srcset: "img-360.jpg 360w, img-768.jpg 768w",
-  // or src: "img-360.jpg",
-})
-```
-
 ### Parameters
 
 All parameters are optional.
