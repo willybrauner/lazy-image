@@ -1,4 +1,4 @@
-import { TLazy, lazyState } from "../common"
+import { TLazy, lazyState } from "./common"
 
 type TLazyImageParams = {
   $element?: HTMLElement

@@ -1,6 +1,6 @@
 export { LazyBackgroundImage } from "./vanilla/LazyBackgroundImage"
 export { LazyImage } from "./vanilla/LazyImage"
-export { lazyState } from "./common"
+export { lazyState } from "./vanilla/common"
 export { Image } from "./react/Image"
 export { BackgroundImage } from "./react/BackgroundImage"
 export { Placeholder } from "./react/Placeholder"
