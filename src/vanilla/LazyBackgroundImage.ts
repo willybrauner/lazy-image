@@ -4,7 +4,7 @@ import {
   parseSrcsetToArray,
   TResponsiveBackgroundImage,
 } from "./helpers"
-import { TLazy, lazyState } from "./common"
+import { TLazy, lazyState } from "../common"
 
 /**
  * @name LazyBackgroundImage

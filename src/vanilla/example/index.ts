@@ -1,5 +1,5 @@
 import "./index.css"
-import { LazyBackgroundImage, LazyImage } from "../src"
+import { LazyBackgroundImage, LazyImage } from "../.."
 
 const buildSrcset = (id: number = 1, ratio = 4 / 3) =>
   [

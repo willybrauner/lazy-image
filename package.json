@@ -19,13 +19,19 @@
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist && rm -rf tsconfig.tsbuildinfo",
     "compile": "microbundle",
-    "dev": "vite"
+    "dev:vanilla": "vite --config vite.config.vanilla.ts",
+    "dev:react": "vite --config vite.config.react.ts"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "@babel/preset-typescript": "^7.15.0",
-    "microbundle": "^0.13.3",
-    "prettier": "^2.3.2",
-    "vite": "^2.5.0"
+    "@babel/preset-typescript": "^7.16.7",
+    "@wbe/fake-data-utils": "^2.3.0",
+    "microbundle": "^0.15.0",
+    "prettier": "^2.6.2",
+    "vite": "^2.9.6"
   },
   "keywords": [
     "lazy",
