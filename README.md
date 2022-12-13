@@ -2,7 +2,6 @@
 
 A zero dependency lazy and responsive image management for image and background-image.
 React wrapper component using `lazy-image` is available too.
-
 Because the native `loading="lazy"` is not supported on all browsers for now, this library used intersection-observer to detect when the image is visible in the viewport.
 
 ![](https://img.shields.io/npm/v/@wbe/lazy-image/latest.svg)
@@ -318,7 +317,7 @@ Example with `<Image />`:
       height={400}
       alt={"with placeholder"}
     />
-<Placeholder/>
+</Placeholder>
 ```
 
 Example with `<BackgroundImage />`:
@@ -332,7 +331,7 @@ Example with `<BackgroundImage />`:
       height={400}
       alt={"with placeholder"}
     />
-<Placeholder/>
+</Placeholder>
 ```
 
 `<Placeholder />` get children Image ratio to calculate its placeholder height.
@@ -344,7 +343,7 @@ It's possible to specify an arbitrary ratio who will override image dimension
       src={`https://image-url`}
       alt={"with placeholder"}
     />
-<Placeholder />
+</Placeholder>
 ```
 
 ## Props list
