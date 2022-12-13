@@ -316,7 +316,7 @@ Example with `<Image />`:
       height={400}
       alt={"with placeholder"}
     />
-<Placeholder/>
+</Placeholder>
 ```
 
 Example with `<BackgroundImage />`:
@@ -330,7 +330,7 @@ Example with `<BackgroundImage />`:
       height={400}
       alt={"with placeholder"}
     />
-<Placeholder/>
+</Placeholder>
 ```
 
 `<Placeholder />` get children Image ratio to calculate its placeholder height.
@@ -342,7 +342,7 @@ It's possible to specify an arbitrary ratio who will override image dimension
       src={`https://image-url`}
       alt={"with placeholder"}
     />
-<Placeholder />
+</Placeholder>
 ```
 
 ## Props list
